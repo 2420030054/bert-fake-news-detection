@@ -1,0 +1,931 @@
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #159b70;
+    --blue: #1674db;
+    --ink: #102b4c;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: #f4f9fc;
+}
+
+button, textarea {
+    font: inherit;
+}
+
+.app-shell {
+    position: relative;
+    width: min(100% - 32px, 1100px);
+    min-height: 720px;
+    margin: 24px auto;
+    padding: 32px 6%;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(140deg, #ffffff 30%, #f1f9ff);
+    border: 1px solid #e0edf4;
+    border-radius: 32px;
+    box-shadow: 0 22px 70px #193e5910;
+}
+
+.navbar, .brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.brand {
+    gap: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 750;
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 46px;
+    color: white;
+    font-size: 26px;
+    background: var(--green);
+    clip-path: polygon(50% 0, 100% 17%, 92% 70%, 50% 100%, 8% 70%, 0 17%);
+}
+
+.brand-green { color: var(--green); }
+.brand-blue { color: var(--blue); }
+
+.nav-note {
+    color: #69809b;
+    font-size: 14px;
+}
+
+.landing-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    margin: 105px auto 100px;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 2px;
+}
+
+h1 {
+    margin: 16px 0;
+    font-size: clamp(42px, 6vw, 66px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.subtitle {
+    max-width: 500px;
+    color: #627995;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.input-wrap {
+    position: relative;
+    margin-top: 30px;
+    background: #ffffffdf;
+    border: 1px solid #dce8f0;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px #193e5908;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    height: 190px;
+    padding: 20px;
+    resize: vertical;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+textarea::placeholder { color: #8296b0; }
+
+.input-wrap:focus-within {
+    border-color: #65bda1;
+    box-shadow: 0 0 0 4px #159b7012;
+}
+
+#char-count {
+    display: block;
+    padding: 0 18px 14px;
+    color: #7890aa;
+    text-align: right;
+    font-size: 12px;
+}
+
+#check-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    margin-top: 16px;
+    padding: 19px;
+    border: 0;
+    border-radius: 16px;
+    color: white;
+    font-weight: 700;
+    background: linear-gradient(100deg, #159b70, #0cad91);
+    box-shadow: 0 10px 24px #159b7024;
+    cursor: pointer;
+    transition: transform .25s, box-shadow .25s, opacity .25s;
+}
+
+#check-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px #159b7035;
+}
+
+#check-button:disabled { opacity: .65; cursor: wait; }
+
+.disclaimer {
+    color: #7488a1;
+    text-align: center;
+    font-size: 13px;
+}
+
+#error-message {
+    color: #d32f45;
+    font-size: 14px;
+}
+
+/* Animated landscape on the landing page */
+.landscape {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background: linear-gradient(#e7f6ff, #d5f7e9);
+    transition: background 1s ease;
+}
+
+.hill {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 120px;
+    border-radius: 50% 50% 0 0;
+    animation: wave 9s ease-in-out infinite alternate;
+}
+
+.hill-back {
+    bottom: 45px;
+    background: #c5e9f8;
+}
+
+.hill-front {
+    bottom: -60px;
+    background: #8ee0c7;
+    animation-delay: -3s;
+}
+
+.sun {
+    position: absolute;
+    top: 15px;
+    right: 12%;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffe8a4;
+    opacity: .8;
+    transition: background 1s;
+}
+
+/* Small, simple stick figure */
+.person {
+    position: absolute;
+    bottom: 48px;
+    left: 24%;
+    width: 30px;
+    height: 62px;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.head {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #193c59;
+}
+
+.body {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    height: 25px;
+    border-left: 4px solid #1674a8;
+}
+
+.arm, .leg {
+    position: absolute;
+    width: 4px;
+    border-radius: 4px;
+    background: #193c59;
+    transform-origin: top center;
+}
+
+.arm { top: 17px; height: 19px; }
+.arm-left { left: 12px; transform: rotate(35deg); }
+.arm-right { left: 12px; transform: rotate(-35deg); }
+.leg { top: 36px; height: 22px; }
+.leg-left { left: 12px; transform: rotate(10deg); }
+.leg-right { left: 12px; transform: rotate(-12deg); }
+
+/* Result state */
+body.result-page { transition: background 1s ease; }
+.result-page .app-shell {
+    min-height: 720px;
+    transition: background 1s ease, color 1s ease;
+}
+
+.result-page.positive .app-shell {
+    background: linear-gradient(160deg, #fffdf2, #e3f9e8 60%, #fff2c9);
+}
+
+.result-page.negative .app-shell {
+    background: linear-gradient(160deg, #1c2c42, #354b65 60%, #182638);
+    color: #f5f8ff;
+}
+
+.result-page.uncertain .app-shell {
+    background: linear-gradient(160deg, #f7fbff, #e8f0fb);
+}
+
+.result-content {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 700px);
+    margin: 65px auto 180px;
+    text-align: center;
+    animation: arrive .8s ease both;
+}
+
+.result-symbol {
+    display: grid;
+    place-items: center;
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    font-size: 52px;
+    color: white;
+    animation: pop-in .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.positive .result-symbol { background: #22b77d; box-shadow: 0 0 0 18px #22b77d20; }
+.negative .result-symbol { background: #f04455; box-shadow: 0 0 0 18px #f0445522; }
+.uncertain .result-symbol { background: #357dc1; box-shadow: 0 0 0 18px #357dc122; }
+
+.result-content h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    letter-spacing: -1px;
+}
+
+.result-content p {
+    line-height: 1.7;
+}
+
+.result-badge {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 999px;
+    color: white;
+    font-weight: 750;
+    transition: background .7s ease, transform .4s ease;
+}
+
+.positive .result-badge { background: #159b70; }
+.negative .result-badge { background: #f04455; }
+.uncertain .result-badge { background: #357dc1; }
+
+.result-description { color: #637c98; }
+.negative .result-description { color: #d1dbea; }
+
+.explanation-card {
+    margin-top: 28px;
+    padding: 22px;
+    text-align: left;
+    background: #ffffffd9;
+    color: #183754;
+    border: 1px solid #ffffffaa;
+    border-radius: 20px;
+}
+
+.negative .explanation-card { background: #ffffff12; color: white; border-color: #ffffff24; }
+
+.explanation-card h2 { margin: 0 0 8px; font-size: 17px; }
+.explanation-card p { margin: 0; font-size: 14px; }
+
+.back-button {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 22px;
+    border: 1px solid #b9d8e8;
+    border-radius: 999px;
+    background: #ffffffc9;
+    color: #153b5c;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dark, moody atmosphere for negative results */
+.negative .landscape {
+    background: linear-gradient(#23344c, #465b73);
+}
+.negative .hill-back { background: #34485e; }
+.negative .hill-front { background: #1a2a3c; }
+.negative .sun { background: #a9b8cb; opacity: .2; }
+.negative .head { background: #d3dbe6; }
+.negative .body { border-color: #94a8bd; }
+.negative .arm, .negative .leg { background: #d3dbe6; }
+
+.positive .landscape {
+    background: linear-gradient(#ffeab3, #bcebd2);
+}
+.positive .hill-back { background: #b3e2a4; }
+.positive .hill-front { background: #64c995; }
+.positive .sun { background: #ffcf56; opacity: 1; }
+.positive .arm-left { transform: rotate(135deg); }
+.positive .arm-right { transform: rotate(-135deg); }
+
+.uncertain .landscape { background: linear-gradient(#dce9f5, #c5d9ee); }
+.uncertain .hill-back { background: #bdcfe1; }
+.uncertain .hill-front { background: #9eb8d4; }
+
+/* Smooth movement */
+@keyframes wave {
+    from { transform: translateX(-3%) translateY(0); }
+    to { transform: translateX(3%) translateY(-10px); }
+}
+@keyframes sway {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -3px; }
+}
+@keyframes arrive {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop-in {
+    from { opacity: 0; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+    .app-shell { width: calc(100% - 16px); margin: 8px auto; padding: 22px; border-radius: 24px; }
+    .brand { font-size: 20px; }
+    .nav-note { font-size: 11px; }
+    .landing-content { margin-top: 75px; }
+    .result-content { margin-top: 50px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================================
+   TRUE OR FALSE — COMPACT LANDING PAGE
+   ========================================= */
+
+.landing {
+    min-height: 100vh;
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f8fb;
+}
+
+.landing .landing-shell {
+    width: min(100%, 780px);
+    height: 650px;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 28px 7%;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid #e2edf2;
+    border-radius: 26px;
+    background: linear-gradient(145deg, #ffffff 15%, #f0faf6 100%);
+    box-shadow: 0 24px 65px rgba(38, 78, 100, 0.09);
+}
+
+.landing .navbar {
+    position: relative;
+    z-index: 3;
+}
+
+.landing .brand {
+    font-size: 21px;
+    gap: 10px;
+}
+
+.landing .brand-icon {
+    width: 34px;
+    height: 38px;
+    font-size: 22px;
+}
+
+.landing .nav-note {
+    font-size: 12px;
+}
+
+.landing .landing-content {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 530px);
+    margin: 65px auto 0;
+}
+
+.landing .eyebrow {
+    margin-bottom: 13px;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.landing .landing-content h1 {
+    margin: 0 0 12px;
+    font-size: clamp(38px, 5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -1.8px;
+    color: #102b4c;
+}
+
+.landing .subtitle {
+    margin: 0;
+    max-width: 440px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #637c94;
+}
+
+.landing .input-wrap {
+    margin-top: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.94);
+    border-color: #dce9ee;
+    box-shadow: 0 7px 22px rgba(30, 70, 90, 0.04);
+}
+
+.landing #post-text {
+    height: 112px;
+    min-height: 112px;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.landing #char-count {
+    padding-bottom: 10px;
+}
+
+.landing #check-button {
+    margin-top: 12px;
+    padding: 15px;
+    border-radius: 13px;
+    font-size: 14px;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.5s ease;
+}
+
+.landing #check-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(21, 155, 112, 0.22);
+}
+
+.landing .disclaimer {
+    margin-top: 12px;
+    font-size: 11px;
+}
+
+/* Decorative landscape stays inside the card */
+.landing-landscape {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 115px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #eaf8ff, #d8f5e8);
+    transition: background 1.2s ease;
+}
+
+.landing-sun {
+    position: absolute;
+    right: 13%;
+    top: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffdc82;
+    box-shadow: 0 0 28px rgba(255, 208, 100, 0.35);
+    animation: landing-sun-glow 4s ease-in-out infinite alternate;
+}
+
+.landing-cloud {
+    position: absolute;
+    width: 65px;
+    height: 15px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    animation: landing-cloud-drift 17s linear infinite alternate;
+}
+
+.landing-cloud::before,
+.landing-cloud::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    border-radius: 50%;
+    background: inherit;
+}
+
+.landing-cloud::before {
+    left: 12px;
+    width: 23px;
+    height: 23px;
+}
+
+.landing-cloud::after {
+    left: 31px;
+    width: 17px;
+    height: 17px;
+}
+
+.cloud-one {
+    top: 24px;
+    left: 15%;
+}
+
+.cloud-two {
+    top: 49px;
+    left: 53%;
+    transform: scale(0.7);
+    opacity: 0.65;
+    animation-delay: -7s;
+}
+
+.landing-hill {
+    position: absolute;
+    width: 120%;
+    left: -10%;
+    border-radius: 50% 50% 0 0;
+    transition: background 1.2s ease;
+}
+
+.landing-hill.hill-one {
+    height: 72px;
+    bottom: 35px;
+    background: #bde8b1;
+    animation: landing-hill-wave 8s ease-in-out infinite alternate;
+}
+
+.landing-hill.hill-two {
+    height: 65px;
+    bottom: -34px;
+    background: #71d0a0;
+    animation: landing-hill-wave 10s ease-in-out infinite alternate-reverse;
+}
+
+/* Tiny stick figure */
+.landing-person {
+    position: absolute;
+    z-index: 2;
+    bottom: 38px;
+    left: 24%;
+    width: 24px;
+    height: 55px;
+    animation: landing-person-sway 3s ease-in-out infinite;
+}
+
+.person-head {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #174768;
+}
+
+.person-body {
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    height: 22px;
+    border-left: 3px solid #174768;
+}
+
+.person-arm,
+.person-leg {
+    position: absolute;
+    width: 3px;
+    border-radius: 5px;
+    background: #174768;
+    transform-origin: top center;
+    transition: transform 0.8s ease;
+}
+
+.person-arm {
+    top: 13px;
+    height: 17px;
+}
+
+.person-arm.left {
+    left: 11px;
+    transform: rotate(35deg);
+}
+
+.person-arm.right {
+    left: 11px;
+    transform: rotate(-35deg);
+}
+
+.person-leg {
+    top: 31px;
+    height: 19px;
+}
+
+.person-leg.left {
+    left: 11px;
+    transform: rotate(10deg);
+}
+
+.person-leg.right {
+    left: 11px;
+    transform: rotate(-10deg);
+}
+
+@keyframes landing-cloud-drift {
+    from { translate: -8px 0; }
+    to { translate: 20px 3px; }
+}
+
+@keyframes landing-hill-wave {
+    from { transform: translateX(-2%) translateY(2px); }
+    to { transform: translateX(2%) translateY(-4px); }
+}
+
+@keyframes landing-person-sway {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -2px; }
+}
+
+@keyframes landing-sun-glow {
+    from { box-shadow: 0 0 20px rgba(255, 208, 100, 0.25); }
+    to { box-shadow: 0 0 34px rgba(255, 208, 100, 0.55); }
+}
+
+/* Mobile dimensions */
+@media (max-width: 600px) {
+    .landing {
+        padding: 8px;
+        align-items: flex-start;
+    }
+
+    .landing .landing-shell {
+        width: 100%;
+        height: min(760px, calc(100svh - 16px));
+        min-height: 620px;
+        padding: 22px 20px;
+        border-radius: 22px;
+    }
+
+    .landing .brand {
+        font-size: 18px;
+    }
+
+    .landing .nav-note {
+        max-width: 100px;
+        text-align: right;
+    }
+
+    .landing .landing-content {
+        margin-top: 65px;
+    }
+
+    .landing .landing-content h1 {
+        font-size: clamp(36px, 10vw, 46px);
+    }
+
+    .landing .subtitle {
+        font-size: 13px;
+    }
+
+    .landing-person {
+        left: 19%;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 601px) {
+    .landing .landing-shell {
+        height: calc(100svh - 24px);
+        min-height: 570px;
+    }
+
+    .landing .landing-content {
+        margin-top: 35px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-cloud,
+    .landing-hill,
+    .landing-person,
+    .landing-sun {
+        animation: none !important;
+    }
+}
+
+/* Full-screen results page */
+body.result-page {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.result-page .app-shell {
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    min-height: 620px;
+    margin: 0;
+    padding: 30px clamp(22px, 7vw, 100px);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.result-page .result-content {
+    width: min(100%, 700px);
+    margin: clamp(35px, 7vh, 70px) auto 150px;
+}
+
+.result-page .landscape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+}
+
+.result-page .explanation-card {
+    max-height: 34vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+    .result-page .app-shell {
+        min-height: 100vh;
+        height: auto;
+        padding: 22px 18px 160px;
+    }
+
+    .result-page .result-content {
+        margin: 45px auto 30px;
+    }
+
+    .result-page .explanation-card {
+        max-height: none;
+    }
+
+    .result-page .landscape {
+        height: 115px;
+    }
+}
+
+/* Make the landing page fill the browser */
+body.landing {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: #f3f8fb;
+}
+
+.landing .landing-shell {
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    min-height: 650px;
+    margin: 0;
+    padding: 30px clamp(24px, 7vw, 100px);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* Keep the form centered and comfortably sized */
+.landing .landing-content {
+    width: min(100%, 620px);
+    margin: clamp(55px, 10vh, 100px) auto 140px;
+}
+
+.landing .landing-content h1 {
+    font-size: clamp(44px, 5vw, 64px);
+}
+
+.landing .subtitle {
+    font-size: 16px;
+}
+
+.landing .input-wrap {
+    margin-top: 28px;
+}
+
+.landing #post-text {
+    height: 160px;
+}
+
+/* Give the animated scene more room at the bottom */
+.landing .landing-landscape {
+    height: 155px;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+    .landing .landing-shell {
+        min-height: 100vh;
+        height: auto;
+        padding: 22px 20px 170px;
+    }
+
+    .landing .landing-content {
+        margin-top: 65px;
+    }
+
+    .landing .landing-content h1 {
+        font-size: 42px;
+    }
+
+    .landing .input-wrap textarea {
+        height: 140px;
+    }
+
+    .landing .landing-landscape {
+        height: 120px;
+    }
+}
+
+.lime-word {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    background: rgba(125, 145, 165, 0.10);
+}
+
+.lime-word .supports {
+    color: #159b70;
+    font-weight: 600;
+}
+
+.lime-word .opposes {
+    color: #e04454;
+    font-weight: 600;
+}
+

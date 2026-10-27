@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result — True or False</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="result-page">
+    <main class="app-shell">
+        <header class="navbar">
+            <a class="brand" href="/">
+                <span class="brand-icon">✓</span>
+                <span><span class="brand-green">True</span> or <span class="brand-blue">False</span></span>
+            </a>
+            <button class="back-button" id="check-again">← Check another post</button>
+        </header>
+
+        <section class="result-content" id="result-root">
+            <div class="result-symbol" id="result-symbol">✓</div>
+            <h1 id="result-heading">Analyzing your post...</h1>
+            <span class="result-badge" id="result-label">Loading</span>
+            <p class="result-description" id="result-description"></p>
+
+            <article class="explanation-card">
+                <h2>Post analyzed</h2>
+                <p id="submitted-text"></p>
+                <h2>Model confidence scores</h2>
+                <div id="probabilities"></div>
+                <h2>Why this result?</h2>
+                <div id="explanation"></div>
+            </article>
+        </section>
+
+        <div class="landscape" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="hill hill-back"></div>
+            <div class="hill hill-front"></div>
+            <div class="person">
+                <span class="head"></span>
+                <span class="body"></span>
+                <span class="arm arm-left"></span>
+                <span class="arm arm-right"></span>
+                <span class="leg leg-left"></span>
+                <span class="leg leg-right"></span>
+            </div>
+        </div>
+    </main>
+    <script src="/static/script.js"></script>
+</body>
+</html>

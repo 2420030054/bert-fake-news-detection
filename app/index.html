@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True or False</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="landing">
+    <main class="app-shell landing-shell">
+
+        <header class="navbar">
+            <a class="brand" href="/">
+                <span class="brand-icon">✓</span>
+                <span><span class="brand-green">True</span> or
+                <span class="brand-blue">False</span></span>
+            </a>
+            <span class="nav-note">AI-powered post checker</span>
+        </header>
+
+        <section class="landing-content">
+            <p class="eyebrow">THINK BEFORE YOU SHARE</p>
+
+            <h1>Question<br>what you read.</h1>
+
+            <p class="subtitle">
+                Paste a social media post and see how our AI classifies it.
+            </p>
+
+            <form id="post-form">
+                <div class="input-wrap">
+                    <textarea
+                        id="post-text"
+                        maxlength="1000"
+                        placeholder="Paste your post here..."
+                        required
+                    ></textarea>
+                    <span id="char-count">0/1000</span>
+                </div>
+
+                <button id="check-button" type="submit">
+                    Check post <span>→</span>
+                </button>
+
+                <p id="error-message" role="alert"></p>
+            </form>
+
+            <p class="disclaimer">
+                AI predictions can be wrong. Always verify important claims.
+            </p>
+        </section>
+
+        <!-- Animated landscape -->
+        <div class="landing-landscape" aria-hidden="true">
+            <div class="landing-sun"></div>
+            <div class="landing-cloud cloud-one"></div>
+            <div class="landing-cloud cloud-two"></div>
+            <div class="landing-hill hill-one"></div>
+            <div class="landing-hill hill-two"></div>
+
+            <div class="landing-person">
+                <span class="person-head"></span>
+                <span class="person-body"></span>
+                <span class="person-arm left"></span>
+                <span class="person-arm right"></span>
+                <span class="person-leg left"></span>
+                <span class="person-leg right"></span>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

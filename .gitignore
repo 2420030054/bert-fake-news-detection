@@ -1,0 +1,26 @@
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Mac and editor files
+.DS_Store
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python caches
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Intermediate model checkpoints
+models/bert_checkpoints/
+
+# Large model weights: host separately
+models/bert_fake_news/*.safetensors
+models/bert_fake_news/*.bin
+models/bert_fake_news/*.pt
